@@ -21,3 +21,18 @@ docker-compose up --build
 
 # Access the docs
 http://localhost:8000/docs
+
+## Project structure
+
+auth_service/
+│
+├── app/
+│   ├── main.py                # FastAPI entry point
+│   ├── auth.py                # Auth functions (login, logout, token)
+│   ├── database.py            # MySQL connection
+│   ├── redis_blacklist.py     # Funciones de blacklist con Redis
+│   └── models.py              # Modelos Pydantic
+│
+├── requirements.txt           # Dependencias del proyecto
+├── README.md                  # Documentación del proyecto
+└── .env                       # Variables de entorno (no subir a GitHub)
