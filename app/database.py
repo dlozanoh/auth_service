@@ -3,7 +3,7 @@ import os
 import hashlib
 
 conn = mysql.connector.connect(
-    host=os.getenv("MYSQL_HOST", "localhost"),
+    host=os.getenv("MYSQL_HOST", "db"),
     port=int(os.getenv("MYSQL_PORT", 3306)),
     user=os.getenv("MYSQL_USER", "root"),
     password=os.getenv("MYSQL_PASSWORD", "password"),
