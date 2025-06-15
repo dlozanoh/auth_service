@@ -1,24 +1,21 @@
-from fastapi import FastAPI, Depends, HTTPException
-from fastapi.security import OAuth2PasswordRequestForm, HTTPBearer, HTTPAuthorizationCredentials
-from app.auth import login_user, logout_token, get_current_user
-from app.models import Token
-from app.redis_blacklist import is_blacklisted
+from fastapi import FastAPI, Depends, HTTPException, status, Request
+from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
+from app import auth, database, redis_blacklist
 
 app = FastAPI()
-security = HTTPBearer()
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
-@app.post("/login", response_model=Token)
+@app.post("/login")
 def login(form_data: OAuth2PasswordRequestForm = Depends()):
-    return login_user(form_data.username, form_data.password)
+    if not database.verify_user(form_data.username, form_data.password):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Incorrect credentials")
+    token = auth.create_access_token(data={"sub": form_data.username})
+    return {"access_token": token, "token_type": "bearer"}
 
-@app.post("/logout")
-def logout(credentials: HTTPAuthorizationCredentials = Depends(security)):
-    token = credentials.credentials
-    if is_blacklisted(token):
-        raise HTTPException(status_code=400, detail="Token already blacklisted")
-    logout_token(token)
-    return {"msg": "Logged out"}
+@app.get("/")
+def read_root():
+    return {"Hello": "World"}
 
-@app.get("/me")
-def me(credentials: HTTPAuthorizationCredentials = Depends(security)):
-    return get_current_user(credentials.credentials)
+

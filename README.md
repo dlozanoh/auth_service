@@ -65,4 +65,3 @@ MYSQL_PASSWORD=password
 MYSQL_DB=authdb
 REDIS_HOST=redis
 
-
