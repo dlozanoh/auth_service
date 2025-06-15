@@ -28,17 +28,21 @@ A secure, containerized authentication microservice built with **FastAPI**, usin
 
 ## 📁 Project Structure
 
-auth_service/
-├── app/                            # Application logic
-│   ├── main.py                     # FastAPI app + route definitions
-│   ├── auth.py                     # JWT creation and decoding logic
-│   ├── database.py                 # MySQL connection + user verification
-│   ├── redis_blacklist.py          # Token blacklisting using Redis
-│   ├── models.py                   # Pydantic models (schemas)
-├── init.sql                        # SQL script to initialize MySQL schema and default user
-├── .env                            # Environment variables
-├── requirements.txt                # Python package dependencies
-├── Dockerfile
+```text
+📦 auth_service/
+ ┣ 📂 app/                            → Application logic
+ ┃ ┣ 📄 main.py                      → FastAPI app & route definitions
+ ┃ ┣ 📄 auth.py                      → JWT creation and decoding
+ ┃ ┣ 📄 database.py                  → MySQL DB connection & user verification
+ ┃ ┣ 📄 redis_blacklist.py           → Redis-based token blacklisting
+ ┃ ┗ 📄 models.py                    → Pydantic schemas
+ ┣ 📄 init.sql                        → SQL script to initialize DB & default user
+ ┣ 📄 .env                            → Environment variables for config
+ ┣ 📄 requirements.txt                → Python package dependencies
+ ┣ 📄 Dockerfile                      → Docker image build for the API
+ ┣ 📄 docker-compose.yml              → Service orchestration: API + DB + Redis
+ ┗ 📄 README.md                       → Project documentation
+
 
 
 ## ▶️ Run it
