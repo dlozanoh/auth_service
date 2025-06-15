@@ -54,6 +54,12 @@ docker-compose up --build
 # Access the docs
 http://localhost:8000/docs
 
+# Using Makefile
+make up          # Start the app
+make test        # Run unit tests
+make format      # Format code with Black
+make redis-cli   # Access Redis CLI
+
 
 ---
 

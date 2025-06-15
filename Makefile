@@ -1,12 +1,61 @@
-# Makefile for the auth_service project
+# Makefile for Authentication Service with JWT, MySQL, and Redis
 
-.PHONY: build run clean
+PROJECT_NAME=auth_service
+COMPOSE=docker-compose
+PYTHON=docker-compose exec app python
 
-build:
-	docker build -t auth_service .
+# 🐳 Docker commands
+up:
+	@echo "🚀 Starting $(PROJECT_NAME) services..."
+	$(COMPOSE) up --build
 
-run:
-	docker run -p 8000:8000 auth_service
+down:
+	@echo "🛑 Stopping $(PROJECT_NAME) services..."
+	$(COMPOSE) down
 
-clean:
-	docker rmi auth_service || true
+restart: down up
+
+logs:
+	$(COMPOSE) logs -f
+
+# 🧪 Testing & Formatting
+test:
+	@echo "🧪 Running tests..."
+	$(PYTHON) -m unittest discover -s app/tests
+
+format:
+	@echo "🎨 Formatting with Black..."
+	$(PYTHON) -m black app/
+
+lint:
+	@echo "🔍 Linting with flake8..."
+	$(PYTHON) -m flake8 app/
+
+# 🛠️ DB / Redis
+mysql:
+	@echo "🐬 Connecting to MySQL CLI..."
+	docker exec -it $(PROJECT_NAME)-mysql-1 mysql -uuser -ppassword auth_db
+
+redis-cli:
+	@echo "🧠 Connecting to Redis CLI..."
+	docker exec -it $(PROJECT_NAME)-redis-1 redis-cli
+
+# ⚙️ Misc
+shell:
+	@echo "🐚 Dropping into shell..."
+	$(COMPOSE) exec app sh
+
+help:
+	@echo ""
+	@echo "Makefile commands for $(PROJECT_NAME):"
+	@echo "  up           - Build and start all services"
+	@echo "  down         - Stop all services"
+	@echo "  restart      - Restart services"
+	@echo "  logs         - Tail logs"
+	@echo "  test         - Run unit tests"
+	@echo "  format       - Run Black formatter"
+	@echo "  lint         - Run flake8 linter"
+	@echo "  mysql        - Open MySQL CLI"
+	@echo "  redis-cli    - Open Redis CLI"
+	@echo "  shell        - Open shell in app container"
+	@echo ""
