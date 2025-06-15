@@ -42,7 +42,7 @@ A secure, containerized authentication microservice built with **FastAPI**, usin
  ┣ 📄 Dockerfile                      → Docker image build for the API
  ┣ 📄 docker-compose.yml              → Service orchestration: API + DB + Redis
  ┗ 📄 README.md                       → Project documentation
-
+```
 
 
 ## ▶️ Run it
