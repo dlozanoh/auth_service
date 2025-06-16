@@ -1,26 +1,26 @@
 version: '3.8'
 
 services:
-  web:
+  auth_web:
     build: .
     ports:
       - "8000:8000"
     depends_on:
-        db:
-          condition: service_healthy
+        - db
+        - redis
     env_file:
       - .env
 
   db:
-    image: mysql:8
-    restart: always
+    image: postgres:15
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: authdb
+      POSTGRES_DB: authdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
     ports:
-      - "3306:3306"
+      - "5432:5432"
     volumes:
-      - db_data:/var/lib/mysql
+      - db_data:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
   redis:

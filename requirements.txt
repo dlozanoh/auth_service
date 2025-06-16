@@ -2,5 +2,6 @@ fastapi
 uvicorn
 python-jose
 redis
-mysql-connector-python
 python-dotenv
+psycopg2-binary
+python-multipart

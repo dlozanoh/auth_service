@@ -34,7 +34,7 @@ lint:
 # 🛠️ DB / Redis
 mysql:
 	@echo "🐬 Connecting to MySQL CLI..."
-	docker exec -it $(PROJECT_NAME)-mysql-1 mysql -uuser -ppassword auth_db
+	docker exec -it $(PROJECT_NAME)-mysql mysql -uuser -ppassword auth_db
 
 redis-cli:
 	@echo "🧠 Connecting to Redis CLI..."
