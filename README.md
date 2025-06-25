@@ -1,4 +1,4 @@
-# 🔐 Authentication Service with JWT, MySQL, and Redis
+# 🔐 Authentication Service with JWT, PostgreSQL, and Redis
 
 A secure, containerized authentication microservice built with **FastAPI**, using **JWT** for stateless authentication, **PostgreSQL** for persistent user storage, and **Redis** for token blacklisting (logout).
 
@@ -11,7 +11,7 @@ A secure, containerized authentication microservice built with **FastAPI**, usin
 - 🔁 Token blacklist on logout (Redis)
 - 🔒 Protected route with token validation
 - 🧂 SHA-256 password hashing
-- 🐳 Fully Dockerized environment (API + MySQL + Redis)
+- 🐳 Fully Dockerized environment (API + PostgreSQL + Redis)
 - ⚙️ Auto-initialized database with test user
 
 ---
@@ -19,7 +19,7 @@ A secure, containerized authentication microservice built with **FastAPI**, usin
 ## 📦 Tech Stack
 
 - **FastAPI** (Python)
-- **MySQL 8**
+- **PostgreSQL**
 - **Redis 7**
 - **JWT (HS256)**
 - **Docker + Docker Compose**
