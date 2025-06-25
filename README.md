@@ -1,6 +1,6 @@
 # 🔐 Authentication Service with JWT, MySQL, and Redis
 
-A secure, containerized authentication microservice built with **FastAPI**, using **JWT** for stateless authentication, **MySQL** for persistent user storage, and **Redis** for token blacklisting (logout).
+A secure, containerized authentication microservice built with **FastAPI**, using **JWT** for stateless authentication, **PostgreSQL** for persistent user storage, and **Redis** for token blacklisting (logout).
 
 ---
 
