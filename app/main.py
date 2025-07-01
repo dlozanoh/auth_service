@@ -10,7 +10,7 @@ class SignupRequest(BaseModel):
     username: str
     password: str
     
-@app.post("/signup", status_code=status.HTTP_201_CREATED)
+@app.post("/register", status_code=status.HTTP_201_CREATED)
 def register(user: SignupRequest):
     if database.user_exists(user.username):
         raise HTTPException(status_code=400, detail="Username already exists")
