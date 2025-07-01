@@ -66,11 +66,18 @@ make redis-cli   # Access Redis CLI
 ## 🔧 Environment Variables (`.env`)
 
 ```env
+
 SECRET_KEY=your_super_secret_key
-MYSQL_HOST=db
-MYSQL_PORT=3306
-MYSQL_USER=root
-MYSQL_PASSWORD=password
-MYSQL_DB=authdb
+POSTGRES_HOST=db
+POSTGRES_PORT=5432
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=password
+POSTGRES_DB=authdb
 REDIS_HOST=redis
 
+| Method | Endpoint     | Description                         |
+| ------ | ---------    | ----------------------------------- |
+| POST   | `/signup`    | Register and create user            |    
+| POST   | `/login`     | Authenticates and returns JWT       |
+| POST   | `/logout`    | Invalidates current JWT token       |
+| GET    | `/me`        | Returns user info if token is valid |

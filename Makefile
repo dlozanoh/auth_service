@@ -32,9 +32,9 @@ lint:
 	$(PYTHON) -m flake8 app/
 
 # 🛠️ DB / Redis
-mysql:
-	@echo "🐬 Connecting to MySQL CLI..."
-	docker exec -it $(PROJECT_NAME)-mysql mysql -uuser -ppassword auth_db
+connect_postgres:
+	@echo "🐬 Connecting to PostgreSQL CLI..."
+	docker-compose exec db psql -U <username> -d <database>
 
 redis-cli:
 	@echo "🧠 Connecting to Redis CLI..."

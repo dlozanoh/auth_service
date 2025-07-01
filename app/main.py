@@ -1,9 +1,21 @@
 from fastapi import FastAPI, Depends, HTTPException, status, Request
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
+from pydantic import BaseModel
 from app import auth, database, redis_blacklist
 
 app = FastAPI()
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
+
+class SignupRequest(BaseModel):
+    username: str
+    password: str
+    
+@app.post("/signup", status_code=status.HTTP_201_CREATED)
+def register(user: SignupRequest):
+    if database.user_exists(user.username):
+        raise HTTPException(status_code=400, detail="Username already exists")
+    database.create_user(user.username, user.password)
+    return {"msg": "User registered successfully"}
 
 @app.post("/login")
 def login(form_data: OAuth2PasswordRequestForm = Depends()):
